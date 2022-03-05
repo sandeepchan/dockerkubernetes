@@ -1,0 +1,25 @@
+mongo
+docker run --name mongodb --rm -d -p 27017:27017 mongo
+docker run --name goals-backend  --add-host=host.docker.internal:172.17.0.1 --rm goals-node
+
+docker run  --name goals-react --rm -p 3000:3000 -it goals-react
+
+
+docker network create goals-net
+
+docker run --name mongodb --rm -d --network goals-net mongo
+docker run --name goals-backend --rm -d --network goals-net -p 80:80 goals-node
+
+docker run  --name goals-react --rm --network goals-net -p 3000:3000 -it goals-react
+
+
+// Persistance data
+
+docker run --name mongodb -v data:/data/db    --rm -d --network goals-net -e MONGO_INITDB_ROOT_USERNAME=sandeep -e MONGO_INITDB_ROOT_PASSWORD=sandeep mongo
+
+
+
+docker run --name goals-backend -v :/home/sandeep/secondary/multi-01-starting-setup/backend:app -v logs:/app/logs -v app/node_modules --rm -d --network goals-net -p 80:80 goals-node
+
+longer path override shorter path so make sure to handle these paths like node_modules and logs
+inside container  node_modules should stays there not override with the realone host
