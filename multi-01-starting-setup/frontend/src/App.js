@@ -103,6 +103,7 @@ function App() {
 
   return (
     <div>
+      <h1>lol</h1>
       {error && <ErrorAlert errorText={error} />}
       <GoalInput onAddGoal={addGoalHandler} />
       {!isLoading && (
