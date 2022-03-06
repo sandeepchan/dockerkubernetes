@@ -26,3 +26,6 @@ inside container  node_modules should stays there not override with the realone 
 
 
 docker run  --name goals-react -v /home/sandeep/secondary/multi-01-starting-setup/frontend/src:/app/src --rm --network goals-net -p 3000:3000 -it goals-react
+
+
+chown -R root  /home/sandeep/secondary/multi-01-starting-setup
